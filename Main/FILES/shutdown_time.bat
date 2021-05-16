@@ -96,6 +96,8 @@ for /F "tokens=1" %%e in ("%date_dog_file%") do SET DAY_IN_DOG=%%e
 IF %TODAY% == %DAY_IN_DOG% (
 	GOTO WATCH_DOG_TIME
 	) else (
+	icacls C:\Users\%USERNAME%\LOG\watch_dog /grant %USERNAME%:(DE)
+	TIMEOUT 1
 	DEL c:\Users\%USERNAME%\LOG\watch_dog
 	GOTO NEW_DAY
 	)		
@@ -151,6 +153,8 @@ IF %TODAY% == %DAY_IN_DOG% (
 		
 		for /f "delims=" %%p in ('powershell -Command "Get-Date -format 'dd.MM.yy'"')  do echo %%p > c:\Users\%USERNAME%\LOG\History%base64%
 		echo %TODAY% > c:\Users\%USERNAME%\LOG\watch_dog
+		TIMEOUT 1
+		icacls C:\Users\%USERNAME%\LOG\watch_dog /deny %USERNAME%:(DE)
 		
 		
 		IF NOT %base64% == 0 GOTO HISTORY0
@@ -348,6 +352,8 @@ IF EXIST "C:\Users\%USERNAME%\LOG\watch_dog" (
 	
 	IF NOT EXIST "c:\Users\%USERNAME%\LOG\watch_dog"	(
 		echo %TODAY% > c:\Users\%USERNAME%\LOG\watch_dog
+		TIMEOUT 1
+		icacls C:\Users\%USERNAME%\LOG\watch_dog /deny %USERNAME%:(DE)
 		GOTO START_ON
 		) else (
 		GOTO START_ON
@@ -539,6 +545,8 @@ GOTO TIME_FOR_CRASH
 	set "md5_end=%md5_end: =%
 	echo %md5_end%>c:\Users\%USERNAME%\LOG\HASH
 	ENDLOCAL
+	icacls C:\Users\%USERNAME%\LOG\watch_dog /grant %USERNAME%:(DE)
+	TIMEOUT 1
 	DEL c:\Users\%USERNAME%\LOG\watch_dog
 	::shutdown  /F /S /T 1
 	powershell -Command (Get-WmiObject -Class Win32_OperatingSystem).Win32Shutdown(4)
