@@ -75,8 +75,8 @@ SETLOCAL EnableDelayedExpansion
 for /f %%o in ('powershell ^(get-date^).DayOfWeek') do set DAY=%%o 
 
   set True=
-  IF  %DAY% == %SATURDAY% set True=1
-  IF  %DAY% == %SUNDAY% set True=1
+  IF  %DAY% == %SATURDAY_t% set True=1
+  IF  %DAY% == %SUNDAY_t% set True=1
   
   IF defined True (
   echo %WEEKEND_TIME_t% & set /a atr_time_t=%WEEKEND_TIME_t%
