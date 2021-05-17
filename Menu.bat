@@ -26,6 +26,9 @@ if '%errorlevel%' NEQ '0' (
  :Start1 
     cls
     goto Start
+	
+	set "input="
+	
     :Start
 	COLOR 17
 	CLS
@@ -49,12 +52,45 @@ if '%errorlevel%' NEQ '0' (
 	
     set input=
     set /p input= Enter your choice:
-    if %input% equ %add% goto A if NOT goto Start1
-	if %input% equ %add2% goto B if NOT goto Start1
-	if %input% equ %add3% goto C if NOT goto Start1
-	if %input% equ %add4% goto D if NOT goto Start1
-	if %input% equ %add5% goto E if NOT goto Start1
-	if %input% equ %add6% goto F if NOT goto Start1
+	
+	GOTO SET_OPERATION
+	
+	:SET_OPERATION
+	
+	echo:
+	echo:
+	set operator=1
+	
+	IF "%input%" equ "%add%" Set operator=2
+	IF "%input%" equ "%add2%" Set operator=2
+	IF "%input%" equ "%add3%" Set operator=2
+	IF "%input%" equ "%add4%" Set operator=2
+	IF "%input%" equ "%add5%" Set operator=2
+	IF "%input%" equ "%add6%" Set operator=2
+	
+	GOTO CHECK_LOOP
+	
+	:CHECK_LOOP
+	setlocal enabledelayedexpansion
+
+	IF  %operator% EQU 2 (
+	GOTO OPTION_CHOOSEN
+	)	else	(
+	CLS
+	ECHO "MUSISZ PODAC PRAWIDLOWY NUMER OD 1-6"
+	GOTO Start1
+	)
+	
+	:OPTION_CHOOSEN
+	
+	if %input% equ %add% goto A 
+	if %input% equ %add2% goto B 
+	if %input% equ %add3% goto C 
+	if %input% equ %add4% goto D 
+	if %input% equ %add5% goto E 
+	if %input% equ %add6% goto F
+	
+	
 
     :A
 	CALL %~dp0Main\INSTALL.bat
