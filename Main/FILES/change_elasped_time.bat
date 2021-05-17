@@ -1,5 +1,6 @@
 @echo off
 COLOR 57
+
 :: BatchGotAdmin
 :-------------------------------------
 REM  --> Check for permissions
@@ -23,6 +24,7 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
     pushd "%CD%"
     CD /D "%~dp0"
+
 
 SET  SATURDAY=Saturday
 
@@ -101,10 +103,53 @@ wmic UserAccount get Name
 	:SHOW_TIME
 	echo:
 	echo:
-	echo "OBECNY POZOSTALO CZASU: %target_time%"
-	GOTO SET_HOW_MANY
+	echo "OBECNY POZOSTALO CZASU: %target_time% minut"
 	
-	:SET_HOW_MANY
+	GOTO SET_OPERATION
+	
+	:SET_OPERATION
+	
+	echo:
+	echo:
+	set add=plus
+	set sub=minus
+	set add_or_sub=
+	set operator=1
+	echo "CHCESZ DODAC CZY ODJAC CZAS ? "
+	echo:
+	set /p "add_or_sub=NAPISZ: [plus] lub [minus] : "
+	
+	IF "%add_or_sub%" == "plus" Set operator=2
+	IF "%add_or_sub%" == "minus" Set operator=2
+	
+	GOTO CHECK_LOOP
+	
+	:CHECK_LOOP
+	setlocal enabledelayedexpansion
+
+	IF  %operator% EQU 2  (
+	GOTO SET_ARYTMETIC
+	)	else	(
+	CLS
+	ECHO "MUSISZ PODAC PRAWIDLOWY ZNAK ARYTMETYCZNY TZN. plus LUB minus"
+	GOTO SHOW_TIME
+	
+	)
+	
+	:SET_ARYTMETIC
+	
+	IF %add_or_sub% == %sub% ( GOTO SET_HOW_MANY_SUB )
+	IF %add_or_sub% == %add% ( GOTO SET_HOW_MANY_ADD )
+	
+	:SET_HOW_MANY_SUB
+	echo:
+	echo:
+	set /p "time_2_add=PODAJ ILE CZASU CHCESZ ODJAC: "
+	set /A target_time_after = %line% + %time_2_add%
+	GOTO less_then_0
+	
+	
+	:SET_HOW_MANY_ADD
 	echo:
 	echo   "CZAS DODADNY NIE BEDZIE PRZEKRACZAL DOBOWEGO LIMITU. CZYLI DLA DNIA POWSZEDNIEGO: %WEEK_TIME% ; a dla WEEKENDU: %WEEKEND_TIME%"
 	echo:
@@ -150,8 +195,9 @@ wmic UserAccount get Name
 	echo %target_time_after% >> c:\Users\%user_id%\LOG\History%num%
 	
 	set /A line=%target_time_after%
+	
 	IF exist C:\Users\%user_id%\LOG\watch_dog	(
-	icacls C:\Users\%USERNAME%\LOG\watch_dog /grant %USERNAME%:(DE)
+	icacls C:\Users\%user_id%\LOG\watch_dog /grant %user_id%:(DE)
 	TIMEOUT 1
 	DEL	C:\Users\%user_id%\LOG\watch_dog
 	)	else	(
@@ -159,7 +205,7 @@ wmic UserAccount get Name
 	)
 	call C:\WindowsTime\Main\dog_recovery.bat
 	TIMEOUT 2
-	icacls C:\Users\%USERNAME%\LOG\watch_dog /deny %USERNAME%:(DE)
+	icacls C:\Users\%user_id%\LOG\watch_dog /deny %user_id%:(DE)
 	
 	GOTO WRITE_HASH
 		:WRITE_HASH
@@ -174,8 +220,7 @@ wmic UserAccount get Name
 	
 	GOTO NOTIFY
 :NOTIFY
-echo 	"OBECNIE DLA %user_id% CZAS DO WYKORZYSTANIA TO: %target_time_after_zero% " > C:\WindowsTime\Main\Notify\notify2_vbs_notification
+echo 	"OBECNIE DLA %user_id% CZAS DO WYKORZYSTANIA TO: %target_time_after_zero% minut " > C:\WindowsTime\Main\Notify\notify2_vbs_notification
 start 	C:\WindowsTime\Main\Notify\notify2.vbs
 TIMEOUT 3 >nul 2>nul
 ::PAUSE
-
