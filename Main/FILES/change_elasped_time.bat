@@ -219,8 +219,10 @@ wmic UserAccount get Name
 		ENDLOCAL
 	
 	GOTO NOTIFY
+	
 :NOTIFY
-echo 	"OBECNIE DLA %user_id% CZAS DO WYKORZYSTANIA TO: %target_time_after_zero% minut " > C:\WindowsTime\Main\Notify\notify2_vbs_notification
+echo 	"OBECNIE DLA %user_id% CZAS DO WYKORZYSTANIA TO: %target_time_after_zero% minut. URUCHOM CZAS PONOWNIE (JESLI WCZESNIEJ BYL URUCHOMIONY) ! " > C:\WindowsTime\Main\Notify\notify2_vbs_notification
 start 	C:\WindowsTime\Main\Notify\notify2.vbs
 TIMEOUT 3 >nul 2>nul
 ::PAUSE
+
