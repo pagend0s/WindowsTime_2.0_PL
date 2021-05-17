@@ -280,10 +280,13 @@ echo:
 	icacls c:\WindowsTime\Main\  /grant "%identity%":(OI)(CI)F /inheritance:r /t
 	icacls c:\WindowsTime\Main\  /grant *S-1-1-0:(RX) /t
 	
+	icacls C:\WindowsTime\Main\help_sc\kill_pid.ps1 /grant:r "%identity%":F
+	icacls C:\WindowsTime\Main\help_sc\kill_pid.ps1 /reset
+	
 	icacls C:\WindowsTime\Main\Options\  /grant "%identity%":(OI)(CI)F /inheritance:r /t
 	icacls C:\WindowsTime\Main\Options\  /grant *S-1-1-0:(RX) /t
-	icacls "C:\WindowsTime\Main\Options\change_elasped_time.bat" /grant:r "%identity%":F
-	icacls "C:\WindowsTime\Main\Options\change_elasped_time.bat" /reset
+	::icacls "C:\WindowsTime\Main\Options\change_elasped_time.bat" /grant:r "%identity%":F
+	::icacls "C:\WindowsTime\Main\Options\change_elasped_time.bat" /reset
 	
 	icacls C:\WindowsTime\Main\Notify\  /grant "%identity%":(OI)(CI)F /inheritance:r /t
 	icacls C:\WindowsTime\Main\Notify\  /grant *S-1-1-0:(RX) /t
