@@ -17,7 +17,8 @@
 	echo [3]	DODAJ LUB ODEJMIJ CZAS NA DZISIAJ
 	echo [4]	ZMIEN CZAS CODZIENNY LUB WEEKENDOWY
 	echo [5]	POKAZ AKTUALNY STAN CZASU
-	echo [6]	EXIT
+	echo [6]	WLACZ LICZNIK RECZNIE
+	echo [7]	EXIT
 
     set /a add=1
 	set /a add2=2
@@ -25,6 +26,7 @@
 	set /a add4=4
 	set /a add5=5
 	set /a add6=6
+	set /a add7=7
 	
     set input=
     set /p input= Enter your choice:
@@ -43,6 +45,7 @@
 	IF "%input%" equ "%add4%" Set operator=2
 	IF "%input%" equ "%add5%" Set operator=2
 	IF "%input%" equ "%add6%" Set operator=2
+	IF "%input%" equ "%add7%" Set operator=2
 	
 	GOTO CHECK_LOOP
 	
@@ -65,6 +68,7 @@
 	if %input% equ %add4% goto D 
 	if %input% equ %add5% goto E 
 	if %input% equ %add6% goto F
+	if %input% equ %add7% goto G
 
     :A
 	CALL %~dp0Main\Options\INSTALL.bat
@@ -86,5 +90,44 @@
 	CALL %~dp0Main\Options\show_aktu_time.bat
 	GOTO Start
 	
-    :F
+	:F
+	
+		:ASK_FOR
+	
+		echo:
+		echo:
+		set tak=tak
+		set nie=nie
+		set time_on_or_not=
+		set operator_2=1
+		echo "CZY CHCES WLACZYC CZAS ? "
+		echo:
+		set /p "time_on_or_not=NAPISZ: [tak] lub [nie] : "
+	
+		IF "%time_on_or_not%" == "tak" Set operator_2=2
+		IF "%time_on_or_not%" == "nie" Set operator_2=2
+	
+		GOTO CHECK_answer
+	
+		:CHECK_answer
+		setlocal enabledelayedexpansion
+
+		IF  %operator_2% EQU 2  (
+		GOTO Action
+		)	else	(
+		CLS
+		GOTO ASK_FOR
+	
+		)
+		:Action
+	
+		IF %time_on_or_not% == %tak% ( GOTO START_TIME )
+		IF %time_on_or_not% == %nie% ( GOTO NOTIFY )
+	
+		:START_TIME
+
+		start C:\WindowsTime\Main\help_sc\call_after_kill.vbs
+		GOTO Start
+	
+    :G
     exit
