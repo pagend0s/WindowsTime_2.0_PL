@@ -219,6 +219,7 @@ echo:
 	copy "%~dp0\FILES\close_instance.vbs" C:\WindowsTime\Main\help_sc\
 	copy "%~dp0\FILES\initiate_windows.ps1" C:\WindowsTime\Main\help_sc\
 	copy "%~dp0\FILES\call_windowstime.vbs" C:\WindowsTime\Main\help_sc\
+	copy "%~dp0\FILES\call_after_kill.vbs" C:\WindowsTime\Main\help_sc\
 	
 	copy "%~dp0\FILES\INSTALL.bat" C:\WindowsTime\Main\Options\
 	copy "%~dp0\FILES\DEINSTALL.bat" C:\WindowsTime\Main\Options\
@@ -252,6 +253,7 @@ echo:
 	cmd /c "echo.>C:\WindowsTime\Main\help_sc\close_instance.vbs:Zone.Identifier"
 	cmd /c "echo.>C:\WindowsTime\Main\help_sc\initiate_windows.ps1:Zone.Identifier"
 	cmd /c "echo.>C:\WindowsTime\Main\help_sc\call_windowstime.vbs:Zone.Identifier"
+	cmd /c "echo.>C:\WindowsTime\Main\help_sc\call_after_kill.vbs:Zone.Identifier"
 	
 	cmd /c "echo.>c:\WindowsTime\Config\catch_week.bat:Zone.Identifier"
 	cmd /c "echo.>c:\WindowsTime\Config\catch_weekend.bat:Zone.Identifier"
@@ -285,8 +287,7 @@ echo:
 	
 	icacls C:\WindowsTime\Main\Options\  /grant "%identity%":(OI)(CI)F /inheritance:r /t
 	icacls C:\WindowsTime\Main\Options\  /grant *S-1-1-0:(RX) /t
-	::icacls "C:\WindowsTime\Main\Options\change_elasped_time.bat" /grant:r "%identity%":F
-	::icacls "C:\WindowsTime\Main\Options\change_elasped_time.bat" /reset
+	
 	
 	icacls C:\WindowsTime\Main\Notify\  /grant "%identity%":(OI)(CI)F /inheritance:r /t
 	icacls C:\WindowsTime\Main\Notify\  /grant *S-1-1-0:(RX) /t
