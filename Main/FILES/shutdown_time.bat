@@ -497,9 +497,9 @@ GOTO TIME_FOR_CRASH
   IF  %DAY% == %SUNDAY% set True=1
   
   IF defined True (
-  echo %WEEKEND_TIME% & set  atr_time_crash=%WEEKEND_TIME%
+  echo %WEEKEND_TIME% & set /A atr_time_crash=%WEEKEND_TIME%
   ) else (
-  echo %WEEK_TIME% & set  atr_time_crash=%WEEK_TIME%
+  echo %WEEK_TIME% & set /A atr_time_crash=%WEEK_TIME%
   )
   
 
