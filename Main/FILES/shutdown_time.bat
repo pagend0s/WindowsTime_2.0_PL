@@ -22,9 +22,9 @@ SET "DAY="
 
 SET "md5="
 
-for /f %%b in ('call C:\WindowsTime\Config\catch_week.bat') do set WEEK_TIME=%%b 
+for /f %%b in ('call C:\WindowsTime\Config\catch_week.bat') do set /A WEEK_TIME=%%b 
 
-for /f %%c in ('call C:\WindowsTime\Config\catch_weekend.bat') do set WEEKEND_TIME=%%c
+for /f %%c in ('call C:\WindowsTime\Config\catch_weekend.bat') do set /A WEEKEND_TIME=%%c
 
 IF exist C:\WindowsTime\Main\Notify\user_id	(
 	DEL	C:\WindowsTime\Main\Notify\user_id
@@ -203,17 +203,17 @@ IF %TODAY% == %DAY_IN_DOG% (
 					GOTO GET_LINE
 						:GET_LINE
 							For /f "tokens=1 skip=1" %%h in (c:\Users\%USERNAME%\LOG\History%base64%) do (
-							SET /A line=%%h
+							SET  line=%%h
 							GOTO CHECK_DAY
 							)
 							:CHECK_DAY
 							for /f "delims=" %%a in ('type c:\Users\%USERNAME%\LOG\History%base64%') do (
-							set /A set_day=%%a
+							set set_day=%%a
 							GOTO COMPARE_DAYS
 							)	
 							:COMPARE_DAYS
-							IF !set_day!==%TODAY% GOTO  WEEK_OR_WEEKEND
-							IF NOT  !set_day!==%TODAY% GOTO NEW_DAY
+							IF %set_day%==%TODAY% GOTO  WEEK_OR_WEEKEND
+							IF NOT  %set_day%==%TODAY% GOTO NEW_DAY
 					
 		:WEEK_OR_WEEKEND 
 		SETLOCAL EnableDelayedExpansion
@@ -497,9 +497,9 @@ GOTO TIME_FOR_CRASH
   IF  %DAY% == %SUNDAY% set True=1
   
   IF defined True (
-  echo %WEEKEND_TIME% & set /a atr_time_crash=%WEEKEND_TIME%
+  echo %WEEKEND_TIME% & set  atr_time_crash=%WEEKEND_TIME%
   ) else (
-  echo %WEEK_TIME% & set /a atr_time_crash=%WEEK_TIME%
+  echo %WEEK_TIME% & set  atr_time_crash=%WEEK_TIME%
   )
   
 
