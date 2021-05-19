@@ -11,6 +11,7 @@ function button1_pressed{
 function button2_pressed{
 
   (Get-WmiObject -Class Win32_OperatingSystem).Win32Shutdown(4)
+  Start-Process explorer.exe
   
 
   }
