@@ -5,7 +5,7 @@ Projekt wykorzystuje głównie język programowania BATCH (powłoka windows), do
 Celem jest suteczne zablokowanie dostępu do komputera dla osoby, która spędza przy nim za dużo czasu.
 
 Do instalacji nie jest wymagana żadna rejestracja ani połączenie z internetem. Każda operacja wykonywana jest lokalnie.
-Żadnych ukrytych reklam, kosztów czy wyciągania METADANYCH, czysta fukcjonalność i prostota działania.
+Żadnych reklam, kosztów czy wyciągania METADANYCH, czysta fukcjonalność i prostota działania.
 
 Program działa skutecznie na środowisku windows we wszystkich wersjach programowych oraz językowych począwszy od wersji Windows 10 - 1507.
 
