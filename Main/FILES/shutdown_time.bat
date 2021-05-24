@@ -3,6 +3,8 @@ TITLE TIMECOUNTER
 
 FOR /f  %%d in ('echo %USERNAME% ')  do SET user_id=%%d
 
+TIMEOUT 2
+
 call C:\WindowsTime\Main\Options\show_aktu_time.bat
 
 SET call_week_or_weekend=1
