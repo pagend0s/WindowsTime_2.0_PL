@@ -316,7 +316,7 @@ IF EXIST "C:\Users\%USERNAME%\LOG\watch_dog" (
 		echo "NIE MASZ JUZ CZASU, ZOSTAJESZ WYLOGOWANY :DDDD" > C:\WindowsTime\Main\Notify\notify2_vbs_notification
 		echo 3 >> C:\WindowsTime\Main\Notify\notify2_vbs_notification
 		start C:\WindowsTime\Main\Notify\startpower.bat
-		timeout 7
+		timeout 3
 		GOTO SHUTDOWN
 	)
 	:: JESLI ILOSC LINII W History.txt = 95proc (PETLA OSTRZEGAJACA)
@@ -476,6 +476,10 @@ IF EXIST "C:\Users\%USERNAME%\LOG\watch_dog" (
 :SHUTDOWN
 SETLOCAL EnableDelayedExpansion
 
+icacls C:\Users\%USERNAME%\LOG\watch_dog /grant %USERNAME%:(DE)
+TIMEOUT 3
+DEL c:\Users\%USERNAME%\LOG\watch_dog
+
 set /a base64_crash=0
 set /a base64_crash=%random% %%04
 
@@ -545,9 +549,6 @@ GOTO TIME_FOR_CRASH
 	set "md5_end=%md5_end: =%
 	echo %md5_end%>c:\Users\%USERNAME%\LOG\HASH
 	ENDLOCAL
-	icacls C:\Users\%USERNAME%\LOG\watch_dog /grant %USERNAME%:(DE)
-	TIMEOUT 1
-	DEL c:\Users\%USERNAME%\LOG\watch_dog
 	::shutdown  /F /S /T 1
 	powershell -Command (Get-WmiObject -Class Win32_OperatingSystem).Win32Shutdown(4)
 	::START /wait "demo" calc.exe	
