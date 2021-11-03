@@ -317,6 +317,13 @@ echo:
 	echo "CZAS ZOSTAL ZAINSTALOWANY DLA %user_id% !. STANDARDOWO DLA UZYTKOWNIKA JEST USAWIONY CZAS: Pon-Pt 1 godz.. So-Nd 1,5 godz." > C:\WindowsTime\Main\Notify\notify2_vbs_notification
 	start C:\WindowsTime\Main\Notify\notify2.vbs
 	
+	GOTO ADD_TASKMGR_DI
+
+	:ADD_TASKMGR_DI
+	reg load HKLM\TempHive C:\Users\%user_id%\ntuser.dat
+
+	REG.EXE ADD HKLM\TempHive\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\	/v DisableTaskmgr /t REG_DWORD /d 1 /f
+	
 	GOTO END
 
 :END
