@@ -1,4 +1,4 @@
-# WindowsTime_2.0_PL
+# WindowsTime_2.1_PL
 Shell script shutting down the system after the time specified by the configuration file.
 
 https://www.youtube.com/watch?v=8SY4eKI1bnY
