@@ -99,3 +99,8 @@ echo "POZOSTALO "%c%" MIN" > C:\WindowsTime\Main\Notify\notify2_vbs_notification
 	echo 1 >> C:\WindowsTime\Main\Notify\notify2_vbs_notification
 	start C:\WindowsTime\Main\Notify\startpower.bat
 
+GOTO END
+
+:END
+exit
+

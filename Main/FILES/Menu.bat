@@ -9,7 +9,7 @@
 	COLOR 17
 	CLS
     echo --------------------------------------
-    echo     WITAJ W PROGRAMIE WindowsTime_2.0  
+    echo     WITAJ W PROGRAMIE WindowsTime_2.1  
     echo --------------------------------------            
     echo WYBIERZ NUMER OPCJI Z LISTY PONIZEJ:
     echo [1]	ZAINSTALUJ OGRANICZENIE CZASU

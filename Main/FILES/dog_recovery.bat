@@ -9,3 +9,4 @@ goto :eof
 
 :out
 >> C:\Users\%user_id%\LOG\watch_dog echo %xx%
+
