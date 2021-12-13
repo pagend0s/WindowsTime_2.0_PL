@@ -114,7 +114,7 @@ for /F "tokens=1" %%e in ("%date_dog_file%") do SET DAY_IN_DOG=%%e
 IF %TODAY% == %DAY_IN_DOG% (
 	GOTO WATCH_DOG_TIME
 	) else (
-	icacls C:\Users\%USERNAME%\LOG\watch_dog /deny %USERNAME%:(DE)
+	icacls C:\Users\%USERNAME%\LOG\watch_dog /grant %USERNAME%:(DE)
 	TIMEOUT 1
 	DEL c:\Users\%USERNAME%\LOG\watch_dog
 	GOTO NEW_DAY
